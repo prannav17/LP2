@@ -1,0 +1,54 @@
+profit = []
+jobs = []
+deadline = []
+n = int(input("Enter the number of jobs: "))
+
+for i in range(n):
+    p = int(input("Enter the profit of job {}: ".format(i+1)))
+    profit.append(p)
+    j = input("Enter the name of job {}: ".format(i+1))
+    jobs.append(j)
+    d = int(input("Enter the deadline of job {}: ".format(i+1)))
+    deadline.append(d)
+
+profitNJobs = list(zip(profit, jobs, deadline))
+profitNJobs = sorted(profitNJobs, key=lambda x: x[0], reverse=True)
+slot = [0] * (n+1)
+profit = 0
+ans = ['null'] * (n+1)
+
+for i in range(n):
+    job = profitNJobs[i]
+    for j in range(job[2], 0, -1):
+        if slot[j] == 0:
+            ans[j] = job[1]
+            profit += job[0]
+            slot[j] = 1
+            break
+
+print("Jobs scheduled:", ans[1:])
+print("Total profit:", profit)
+
+
+
+
+
+
+Enter the number of jobs: 5
+Enter the profit of job 1: 200
+Enter the name of job 1: j1
+Enter the deadline of job 1: 3
+Enter the profit of job 2: 10
+Enter the name of job 2: j2
+Enter the deadline of job 2: 1
+Enter the profit of job 3: 15
+Enter the name of job 3: j3
+Enter the deadline of job 3: 2
+Enter the profit of job 4: 5
+Enter the name of job 4: j4
+Enter the deadline of job 4: 1
+Enter the profit of job 5: 30
+Enter the name of job 5: j5
+Enter the deadline of job 5: 3
+Jobs scheduled: ['j3', 'j5', 'j1', 'null', 'null']
+Total profit: 245

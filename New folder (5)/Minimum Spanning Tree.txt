@@ -1,0 +1,37 @@
+def greedy_mst(graph):
+    mst = set()
+    visited = set()
+    
+    # Add the first node to visited set
+    visited.add(next(iter(graph.keys())))
+    
+    while len(visited) < len(graph):
+        min_weight = float('inf')
+        min_edge = None
+        
+        # Iterate over visited nodes and find the minimum weight edge
+        for node in visited:
+            for neighbor, weight in graph[node].items():
+                if neighbor not in visited and weight < min_weight:
+                    min_weight = weight
+                    min_edge = (node, neighbor)
+        
+        # Add the minimum weight edge to MST and mark the new node as visited
+        mst.add(min_edge)
+        visited.add(min_edge[1])
+    
+    return mst
+
+# Example graph representation (Adjacency list)
+graph = {
+    'A': {'B': 2, 'C': 3},
+    'B': {'A': 2, 'C': 1, 'D': 1},
+    'C': {'A': 3, 'B': 1, 'D': 2},
+    'D': {'B': 1, 'C': 2}
+}
+
+# Finding MST using Greedy algorithm
+mst = greedy_mst(graph)
+print("Minimum Spanning Tree:")
+for edge in mst:
+    print(edge[0], "--", edge[1])

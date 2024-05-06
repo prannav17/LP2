@@ -1,0 +1,27 @@
+def greedy_job_scheduling(jobs):
+    # Sort jobs by their processing times in ascending order
+    sorted_jobs = sorted(jobs, key=lambda x: x[1])
+    
+    # Initialize schedule and completion time
+    schedule = []
+    completion_time = 0
+    
+    # Iterate through sorted jobs and schedule them greedily
+    for job in sorted_jobs:
+        schedule.append(job[0])
+        completion_time += job[1]
+    
+    return schedule, completion_time
+
+# Example jobs represented as tuples (job_id, processing_time)
+jobs = [
+    ('Job1', 3),
+    ('Job2', 5),
+    ('Job3', 1),
+    ('Job4', 2)
+]
+
+schedule, completion_time = greedy_job_scheduling(jobs)
+
+print("Scheduled jobs:", schedule)
+print("Total completion time:", completion_time)
